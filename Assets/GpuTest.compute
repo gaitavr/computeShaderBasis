@@ -1,0 +1,68 @@
+#pragma kernel Regenerate
+
+RWStructuredBuffer<float4> Colors;
+float Time;
+int Width;
+int Height;
+
+float Rand(float2 n) 
+{
+    return frac(sin(dot(n, float2(12.9898f, 4.1414f))) 
+                 * 43758.5453f);
+}
+
+float Noise(float2 p) 
+{
+    float2 ip = floor(p);
+    float2 u = frac(p);
+    u = u * u * (float2(3.0f, 3.0f) - 2.0f * u);
+
+    float res = lerp(
+        lerp(Rand(ip), Rand(ip + float2(1.0f, 0.0f)), u.x),
+        lerp(Rand(ip + float2(0.0f, 1.0f)), 
+            Rand(ip + float2(1.0f, 1.0f)), u.x), u.y);
+    return res * res;
+}
+
+float Fbm(float2 p)
+{
+    float4 rotation = float4(0.8f, -0.6f, 0.6f, 0.8f);
+    float f = 0.0f;
+    const int octaves = 4;
+    float m = 0.5f;
+        
+    for (int i = 0; i < octaves; i++)
+    {
+        f += m * Noise(p);
+        p = rotation * p * 2;
+        m *= 0.5f;
+    }
+    f += m * Noise(p);
+        
+    return f / 0.769f;
+}
+
+float Pattern(float2 uv)
+{
+    float fbmQ = Fbm(uv);
+    float2 q = float2(fbmQ, fbmQ);
+    float fbmR = Fbm(uv + 14.0f * q + float2(1.7f, 9.2f));
+    float2 r = float2(fbmR, fbmR);
+    r += Time * 0.15f;
+    return Fbm(uv + r);
+}
+
+[numthreads(64,1,1)]
+void Regenerate (uint3 id : SV_DispatchThreadID)
+{
+    int x = id.x % Width;
+    int y = id.x / Width;
+    float2 uv = float2((float)x / Width, (float)y / Height);
+    float displacement = Pattern(uv);
+                    
+    float4 color = float4(displacement * 1.2f, 0.2f, displacement * 5.0f, 
+        1.0f);
+    color.a = min(color.r * 0.25f, 1.0f);
+    Colors[id.x] = color;
+}
+

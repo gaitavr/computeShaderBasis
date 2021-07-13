@@ -1,0 +1,54 @@
+#pragma kernel Fractal
+
+float Time;
+float2 Resolution;
+RWTexture2D<float4> Result;	
+
+float Distance(float2 c)
+{
+	float c2 = dot(c, c);
+	if(256.0 * c2 * c2 - 96.0 * c2 + 32.0 * c.x - 3.0 < 0.0)
+		return 0.0;
+	if(16.0 * (c2 + 2.0 * c.x + 1.0) - 1.0 < 0.0 )
+		return 0.0;
+
+	float di = 1.0;
+	float2 z = 0.0;
+	float m2 = 0.0;
+	float2 dz = 0.0;
+	for(int i = 0; i < 300; i++)
+	{
+		if(m2 > 1024.0)
+		{
+			di = 0.0;
+			break;
+		}
+
+		dz = 2.0 * float2(z.x * dz.x - z.y * dz.y, z.x * dz.y + z.y * dz.x) + float2(1.0, 0.0);			
+		z = float2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y ) + c;	
+		m2 = dot(z,z);
+	}
+
+
+	float d = 0.5 * sqrt(dot(z, z) / dot(dz, dz)) * log(dot(z, z));
+	if(di > 0.5)
+		d = 0.0;
+	
+	return d;
+}
+
+[numthreads(32,18,1)]								
+void Fractal (uint3 id : SV_DispatchThreadID)
+{
+	float2 p = (2.0 * id.xy - Resolution.xy) / Resolution.y;
+
+	float tz = 0.5 - 0.5 * cos(0.225 * Time);
+	float zoo = pow(0.5, 13.0 * tz);
+	float2 c = float2(-0.05, 0.6805) + p * zoo;
+
+	float d = Distance(c);
+    
+	d = clamp(pow(4.0 * d / zoo, 0.2), 0.0, 1.0 );
+    
+	Result[id.xy] = float4(d, d, d, 1.0);
+}

@@ -26,6 +26,7 @@ public class CpuTest : MonoBehaviour
                 for (int y = 0; y < height; y++)
                 {
                     var uv = new Vector2((float)x / width, (float)y / height);
+                    uv *= 4;
                     float displacement = Pattern(uv);
                     
                     var color = new Color(displacement * 1.2f, 0.2f, displacement * 5.0f, 
@@ -88,6 +89,7 @@ public class CpuTest : MonoBehaviour
 
     private float Fract(float value)
     {
-        return value % 1;
+        var floor = Mathf.Floor(value);
+        return value - floor;
     }
 }

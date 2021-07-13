@@ -4,6 +4,7 @@ RWStructuredBuffer<float4> Colors;
 float Time;
 int Width;
 int Height;
+int Iterations;
 
 float Rand(float2 n) 
 {
@@ -55,14 +56,20 @@ float Pattern(float2 uv)
 [numthreads(64,1,1)]
 void Regenerate (uint3 id : SV_DispatchThreadID)
 {
-    int x = id.x % Width;
-    int y = id.x / Width;
-    float2 uv = float2((float)x / Width, (float)y / Height);
-    float displacement = Pattern(uv);
+    for (int i = 0; i < Iterations; i++)
+    {
+        int x = id.x % Width;
+        int y = id.x / Width;
+        float2 uv = float2((float)x / Width, (float)y / Height);
+        uv *= 4;
+        float displacement = Pattern(uv);
                     
-    float4 color = float4(displacement * 1.2f, 0.2f, displacement * 5.0f, 
-        1.0f);
-    color.a = min(color.r * 0.25f, 1.0f);
-    Colors[id.x] = color;
+        float4 color = float4(displacement * 1.2f, 0.2f, displacement * 5.0f, 
+            1.0f);
+        color.a = min(color.r * 0.25f, 1.0f);
+        Colors[id.x] = color;
+    }
 }
+    
+    
 

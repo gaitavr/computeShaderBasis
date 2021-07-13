@@ -6,10 +6,22 @@
     <e p="C:\Users\gaitavr\Desktop\Projects\ComputeShaderBasis" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="CpuTest.cs" t="Include" />
-        <e p="CubesContainer.cs" t="Include" />
-        <e p="GpuTest.compute" t="Include" />
-        <e p="GpuTest.cs" t="Include" />
+        <e p="Compute shader example" t="Include">
+          <e p="cpuSideCode.cs" t="Include" />
+          <e p="Resources" t="Include">
+            <e p="csFractal.compute" t="Include" />
+          </e>
+        </e>
+        <e p="Sample1" t="Include">
+          <e p="CpuTest.cs" t="Include" />
+          <e p="CubesContainer.cs" t="Include" />
+          <e p="GpuTest.compute" t="Include" />
+          <e p="GpuTest.cs" t="Include" />
+        </e>
+        <e p="Sample2" t="Include">
+          <e p="Fractal.cs" t="Include" />
+          <e p="MandelbrotFractal.compute" t="Include" />
+        </e>
       </e>
       <e p="ComputeShaderBasis.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

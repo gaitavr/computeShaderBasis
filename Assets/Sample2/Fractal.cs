@@ -13,7 +13,6 @@ public class Fractal : MonoBehaviour
 
     private int _kernelIndex;
     private uint _threadX;
-    private uint _threadY;
     private RenderTexture _resultTexture;
 
     private void Awake()
@@ -27,7 +26,7 @@ public class Fractal : MonoBehaviour
         _debugImage.texture = _resultTexture;
 
         _kernelIndex = _shader.FindKernel("Fractal");
-        _shader.GetKernelThreadGroupSizes(_kernelIndex, out _threadX, out _threadY, 
+        _shader.GetKernelThreadGroupSizes(_kernelIndex, out _threadX, out _, 
             out _);
         _shader.SetTexture(_kernelIndex, "Result", _resultTexture);
     }

@@ -6,10 +6,12 @@ namespace Sample3
     {
         [SerializeField]
         private int _objectsCount = 20;
-
+        [SerializeField, Range(1, 50)]
+        private float _spread = 30;
+        [SerializeField, Range(0.1f, 2f)]
+        private float _speed = 0.5f;
         [SerializeField]
         private ComputeShader _shader;
-
         [SerializeField]
         private GameObject _prefab;
 
@@ -40,7 +42,8 @@ namespace Sample3
 
         private void Update()
         {
-            _shader.SetFloat("Time", Time.time);
+            _shader.SetFloat("Time", Time.time * _speed);
+            _shader.SetFloat("Spread", _spread);
             _shader.SetBuffer(_kernelIndex, "Positions", _buffer);
             
             var threadGroups = (int) (_objectsCount / _threadGroupSize);

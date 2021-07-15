@@ -20,12 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9fd661a-30ff-4b99-a2eb-b30ca11b4449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sample2/Fractal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sample2/Fractal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.compute" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.compute" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sample3/Sample3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sample3/Sample3.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +38,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C7864A0E-AEB2-4B2A-999F-B177623D54B4/d3/a5f25d0d/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sample2/Fractal.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -50,8 +51,10 @@
         <option value="$PROJECT_DIR$/Assets/Sample2/MandelbrotFractal.cs" />
         <option value="$PROJECT_DIR$/Assets/Sample2/MandelbrotFractal.compute" />
         <option value="$PROJECT_DIR$/Assets/Sample2/Fractal.cs" />
-        <option value="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs" />
         <option value="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.compute" />
+        <option value="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.compute" />
+        <option value="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.cs" />
       </list>
     </option>
   </component>
@@ -105,6 +108,7 @@
       <workItem from="1626203073318" duration="528000" />
       <workItem from="1626203732185" duration="4969000" />
       <workItem from="1626288260081" duration="2500000" />
+      <workItem from="1626373489888" duration="4589000" />
     </task>
     <servers />
   </component>

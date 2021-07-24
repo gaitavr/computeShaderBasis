@@ -19,15 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9fd661a-30ff-4b99-a2eb-b30ca11b4449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ComputeShaderBasis/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sample3/Sample3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sample3/Sample3.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-    </list>
+    <list default="true" id="c9fd661a-30ff-4b99-a2eb-b30ca11b4449" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,10 +45,10 @@
         <option value="$PROJECT_DIR$/Assets/Sample2/Fractal.cs" />
         <option value="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.compute" />
         <option value="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.compute" />
-        <option value="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.shader" />
         <option value="$PROJECT_DIR$/Assets/Sample3/RandomObjectsMoving.cs" />
         <option value="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2Temp.cs" />
         <option value="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sample4/RandomObjectsMoving2.shader" />
       </list>
     </option>
   </component>
@@ -114,7 +106,7 @@
       <workItem from="1626460797306" duration="1108000" />
       <workItem from="1626501471482" duration="634000" />
       <workItem from="1626804020004" duration="3996000" />
-      <workItem from="1626891025039" duration="2702000" />
+      <workItem from="1626891025039" duration="3576000" />
     </task>
     <servers />
   </component>

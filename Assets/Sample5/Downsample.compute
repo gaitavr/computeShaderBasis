@@ -1,0 +1,22 @@
+﻿#pragma kernel DownSample
+
+RWTexture2D<float4> FromTexture;
+RWTexture2D<float4> ToTexture;
+
+float4 ColorLerpUnclamped(float4 c1, float4 c2, float v)
+{
+    return float4(c1.r + (c2.r - c1.r) * v,
+        c1.g + (c2.g - c1.g) * v,
+        c1.b + (c2.b - c1.b) * v,
+        c1.a + (c2.a - c1.a) * v);
+}
+
+[numthreads(32,32,1)]
+void DownSample (uint3 id : SV_DispatchThreadID)
+{
+    
+    
+    // TODO: insert actual code here!
+
+    Sample1[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+}

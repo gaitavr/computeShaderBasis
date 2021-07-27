@@ -24,7 +24,11 @@
           <e p="RandomObjectsMoving2.compute" t="Include" />
           <e p="RandomObjectsMoving2.cs" t="Include" />
           <e p="RandomObjectsMoving2.shader" t="Include" />
-          <e p="RandomObjectsMoving2Temp.cs" t="Include" />
+        </e>
+        <e p="Sample5" t="Include">
+          <e p="Downsample.compute" t="Include" />
+          <e p="TextureDownsample.cs" t="Include" />
+          <e p="TextureScale.cs" t="Include" />
         </e>
       </e>
       <e p="ComputeShaderBasis.sln" t="IncludeFlat" />

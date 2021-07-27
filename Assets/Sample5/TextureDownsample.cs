@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class TextureDownsample : MonoBehaviour
@@ -12,16 +13,18 @@ public class TextureDownsample : MonoBehaviour
     private ComputeShader _shader;
     
     private int _kernelIndex;
-    private uint _threadGroupSizeX;
+    private uint _threadGroupSize;
 
     private string _savePath;
     
     private void Start()
     {
         _savePath = Application.persistentDataPath + $"/samples/";
+        if (Directory.Exists(_savePath) == false)
+            Directory.CreateDirectory(_savePath);
         
         _kernelIndex = _shader.FindKernel("DownSample");
-        _shader.GetKernelThreadGroupSizes(_kernelIndex, out _threadGroupSizeX, 
+        _shader.GetKernelThreadGroupSizes(_kernelIndex, out _threadGroupSize, 
             out _, out _);
     }
         
@@ -29,6 +32,10 @@ public class TextureDownsample : MonoBehaviour
     {
         if (GUI.Button(new Rect(250, 50, 200, 100), "DownSample"))
         {
+            foreach (var file in Directory.EnumerateFiles(_savePath))
+            {
+                File.Delete(file);
+            }
             DownSample();
             UnityEditor.EditorUtility.RevealInFinder(_savePath);
         }
@@ -36,33 +43,48 @@ public class TextureDownsample : MonoBehaviour
 
     private void DownSample()
     {
-        var width = _sourceTexture.width;
-        var height = _sourceTexture.height;
         var factor = 2;
         
         for (int i = 0; i < _samples; i++)
         {
-            width /= factor;
-            height /= factor;
-            factor *= 2;
-
-            var workTexture = new RenderTexture(width, height, 32);
+            var width = _sourceTexture.width / factor;
+            var height = _sourceTexture.height / factor;
+            
+            if(width < _threadGroupSize || height < _threadGroupSize)
+                break;
+            
+            var workTexture = new RenderTexture(width, height, 32)
+            {
+                enableRandomWrite = true
+            };
             workTexture.Create();
             
-            _shader.SetTexture(_kernelIndex, "Texture", workTexture);
-            var yGroupCount = _sourceTexture.height / _sourceTexture.width * _threadGroupSizeX;
-            _shader.Dispatch(_kernelIndex, (int)_threadGroupSizeX, (int)yGroupCount, 1);
+            var computeBuffer = new ComputeBuffer(4, sizeof(int));
+            computeBuffer.SetData(new List<int>()
+            {
+                _sourceTexture.width, _sourceTexture.height,
+                workTexture.width, workTexture.height
+            });
             
-            workTexture.Release();
+            _shader.SetTexture(_kernelIndex, "SourceTexture", _sourceTexture);
+            _shader.SetTexture(_kernelIndex, "DestinationTexture", workTexture);
+            _shader.SetBuffer(_kernelIndex, "Resolutions", computeBuffer);
+            _shader.Dispatch(_kernelIndex, workTexture.width/(int)_threadGroupSize, 
+                workTexture.height/(int)_threadGroupSize, 1);
             
             var textureToSave = new Texture2D(workTexture.width,workTexture.height, TextureFormat.RGB24, false);
             RenderTexture.active = workTexture;
             textureToSave.ReadPixels( new Rect(0, 0, workTexture.width,workTexture.height), 0, 0);
             RenderTexture.active = null;
      
-            var bytes = textureToSave.EncodeToPNG();
+            var bytes = textureToSave.EncodeToJPG();
+            File.WriteAllBytes($"{_savePath}Sample{factor}.jpg", bytes);
+            
             Destroy(textureToSave);
-            File.WriteAllBytes($"{_savePath}Sample{i}.png", bytes);
+            workTexture.Release();
+            computeBuffer.Dispose();
+            
+            factor *= 2;
         }
     }
 }

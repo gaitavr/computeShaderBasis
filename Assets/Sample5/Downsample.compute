@@ -1,7 +1,9 @@
 ﻿#pragma kernel DownSample
 
-RWTexture2D<float4> FromTexture;
-RWTexture2D<float4> ToTexture;
+Texture2D<float4> SourceTexture;
+RWTexture2D<float4> DestinationTexture;
+
+StructuredBuffer<int> Resolutions;
 
 float4 ColorLerpUnclamped(float4 c1, float4 c2, float v)
 {
@@ -14,9 +16,8 @@ float4 ColorLerpUnclamped(float4 c1, float4 c2, float v)
 [numthreads(32,32,1)]
 void DownSample (uint3 id : SV_DispatchThreadID)
 {
+    int ratioX = 1.0f / ((float) Resolutions[2] / (Resolutions[0] - 1));
+    int ratioY = 1.0f / ((float) Resolutions[3] / (Resolutions[1] - 1));
     
-    
-    // TODO: insert actual code here!
-
-    Sample1[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+    DestinationTexture[id.xy] = SourceTexture[id.xy * float2(ratioX, ratioY)];
 }
